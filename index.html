@@ -22,32 +22,30 @@
 
 <body>
     <div id="options" class="box">
-        <h4><i class="fa fa-cog"></i>Opciones:</h4>
 
         <div class="btn-group" role="group" aria-label="Reset">
-            <button type="button" class="btn btn_values btn-secondary" id="btn_reset_ram">
+
+
+            <h4 class="hidden"><i class="fa fa-cog"></i> Opciones:</h4>
+
+            <button id="btn_reset_ram" type="button" class="btn btn_values btn-info">
                 <i class="fa fa-undo"></i> Limpiar Memoria
             </button>
-            <button type="button" class="btn btn_values btn-secondary" id="btn_reset_cpu">
+            <button id="btn_reset_cpu" type="button" class="btn btn_values btn-info">
                 <i class="fa fa-undo"></i> Limpiar CPU
             </button>
-        </div>
-
-        <button type="button" class="btn btn-secondary" id="btn_examples" data-toggle="modal"
-            data-target="#modal_examples">Ejemplos
-        </button>
-
-
-        <div id="run_buttons" class="btn-group" role="group" aria-label="Run">
-            <button type="button" class="btn btn-secondary" id="btn_step">
+            <button id="btn_examples" type="button" class="btn btn-secondary" data-toggle="modal"
+                data-target="#modal_examples">Ejemplos
+            </button>
+            <button id="btn_step" type="button" class="btn btn-primary">
                 <i class="fa fa-step-forward"></i> Paso a paso
             </button>
-            <button type="button" class="btn btn-secondary" id="btn_run">
+            <button id="btn_run" type="button" class="btn btn-primary">
                 <i class="fa fa-play"></i> Ejecutar
             </button>
         </div>
 
-        <div id="hint">
+        <div id="hint" class="alert alert-warning hidden">
             <span id="hint_text"></span>
         </div>
     </div>
@@ -73,16 +71,17 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btn_change_value_ok" class="btn btn-default" data-dismiss="modal">
+                    <button type="button" id="btn_change_value_ok" class="btn btn-primary" data-dismiss="modal">
                         <i class="fa fa-check"></i> OK
                     </button>
-                    <button type="button" class="btn" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
                         <i class="fa fa-close"></i> Cancel
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
     <div id="modal_examples" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -151,10 +150,10 @@
                     </ol>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btn_import" class="btn btn-default" data-dismiss="modal">
+                    <button type="button" id="btn_import" class="btn btn-primary" data-dismiss="modal">
                         <i class="fa fa-check"></i> Import
                     </button>
-                    <button type="button" class="btn" data-dismiss="modal">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
                         <i class="fa fa-close"></i> Cancel
                     </button>
                 </div>

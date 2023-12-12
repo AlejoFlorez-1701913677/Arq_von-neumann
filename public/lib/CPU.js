@@ -25,7 +25,6 @@ var CPU = {
 
     /**
      * Funcionalidad
-     * 
      */
     step: function ()
     {
@@ -39,6 +38,7 @@ var CPU = {
             CPU.showHint('<span class="fetch_decode_execute ' + stageName.toLowerCase() + '">' + stageName + '</span>' + description);
             CPU.STATE = nextState;
         }
+
         switch (CPU.STATE)
         {
             case 0:
@@ -517,11 +517,16 @@ var CPU = {
         }
     },
 
-    //mensaje abajo de la pantalla
+    /**
+     * mensaje abajo de la pantalla
+     * @param {*} html 
+     */
     showHint: function (html)
     {
+        $("#hint").removeClass("hidden");
         $('#hint_text').html(html);
     },
+
     /**
      * rellena un numero con 0
      * EJ. si se necesita un numero de 8 bits y recibimos uno de 4
@@ -548,12 +553,22 @@ var CPU = {
         return CPU.padNumber(v.toString(2), 8);
     },
 
+    /**
+     * 
+     * @param {*} bin 
+     * @returns 
+     */
     bin2hex: function (bin)
     {
         var v = parseInt(bin, 2) & 0xFF;
         return CPU.padNumber(v.toString(16), 2);
     },
 
+    /**
+     * 
+     * @param {*} bin 
+     * @returns 
+     */
     bin2dec: function (bin)
     {
         var v = parseInt(bin, 2) & 0xFF;
@@ -572,6 +587,11 @@ var CPU = {
         return CPU.padNumber((dec & 0xFF).toString(2), 8);
     },
 
+    /**
+     * 
+     * @param {*} hex 
+     * @returns 
+     */
     hex2dec: function (hex)
     {
         var v = parseInt(hex, 16) & 0xFF;
@@ -580,11 +600,15 @@ var CPU = {
         return v;
     },
 
+    /**
+     * 
+     * @param {*} dec 
+     * @returns 
+     */
     dec2hex: function (dec)
     {
         return CPU.padNumber((dec & 0xFF).toString(16), 2);
     },
-
 
     /**
      * Actualiza el valor de los registros
@@ -617,8 +641,6 @@ var CPU = {
             writeValue(CPU.RAM[i], $('#ram_value_' + i));
         }
     },
-
-
 
     /**
      * Dibuja los botones para visualziar los registros
@@ -669,8 +691,6 @@ var CPU = {
         html += '<div class="bus_address" id="address_bus"><h4>Bus <br/><br/> de <br/><br/> direcciones</h4> </div>';
         return html
     },
-
-
 
     /**
      * Dibuja y conecta las flechas
@@ -836,6 +856,7 @@ var CPU = {
             CPU.RAM[address] = initZeros ? 0 : CPU.hex2dec(ram[address]);
             html += '<tr><td id="ram_address_' + address + '" class="value_address value_denary">' + address + '</td><td id="ram_value_' + address + '" class="value value_denary editable" data-description="Dirección de memoria ' + address + '">' + CPU.RAM[address] + '</td></tr>';
         }
+
         html += '</table>';
         html += '</div>';
 
@@ -883,13 +904,8 @@ var CPU = {
 
         html = CPU.drawBus(html)
 
-
-
-
         $(DOM_CPU).html(html);
         CPU.drawArrows();
-
-
 
         $('#modal_change_value').modal({ show: false })
 
@@ -985,7 +1001,6 @@ var CPU = {
                     var reg = parts[1];
                     CPU.REGISTERS[reg] = getInt(jq, value);
                     break;
-
             }
 
             CPU.updateRegisters();
