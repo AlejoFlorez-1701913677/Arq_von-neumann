@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.text.DefaultCaret;
+import javax.swing.SwingWorker;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -38,8 +40,8 @@ public class main extends javax.swing.JFrame {
         setTitle("Proyecto Arquitectura Computadores");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        btnExe.setEnabled(false);
-
+        btnStepByStep.setVisible(false);
+        jLabel10.setVisible(false);
         jPanelFondo.setBackground(new Color(52, 73, 85));
         jPanelGeneral.setBackground(new Color(52, 73, 85));
     }
@@ -366,8 +368,7 @@ public class main extends javax.swing.JFrame {
                             .addGroup(jPanelMemoriaLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTFbDatos))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTFbDatos)))
                     .addGroup(jPanelMemoriaLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -666,8 +667,7 @@ public class main extends javax.swing.JFrame {
                                 .addGap(59, 59, 59)
                                 .addComponent(jLabel15)
                                 .addGap(361, 361, 361)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel12))))
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -714,11 +714,9 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(btnExe, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)))
                         .addGap(6, 6, 6))
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnShowCodops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnShowCodops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(437, 437, 437)
@@ -741,7 +739,7 @@ public class main extends javax.swing.JFrame {
             jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeneralLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1284, Short.MAX_VALUE)
                 .addGap(84, 84, 84))
         );
         jPanelGeneralLayout.setVerticalGroup(
@@ -771,239 +769,255 @@ public class main extends javax.swing.JFrame {
         mdlShow.setAlwaysOnTop(true);
         mdlShow.setVisible(true);
     }//GEN-LAST:event_btnShowCodopsActionPerformed
-
+   
     private void btnExeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExeActionPerformed
-        // TODO add your handling code here:
-        int opcion = Integer.parseInt(codop);
-        System.out.println("Aleo "+opcion);
-        switch (opcion) {
-            case 0000: //move
-                txtResult.setText("la dirección " + inst1 + " se ha movido a la direción " + inst2);
-                jTFmemoria.setText("[" + inst2 + "]: " + inst1);
-                break;
-
-            case 0001: //clear
-                txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 0 ");
-                String clear = "";
-                clear += "[" + inst1 + "]: 000000\n";
-
-                clear += "[" + inst2 + "]: 000000\n";
-
-                jTFmemoria.setText(clear);
-                break;
-
-            case 10: //set
-                txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 1 ");
-                String set = "";
-                set += "[" + inst1 + "]: 111111\n" + "";
-                set += "[" + inst2 + "]: 111111\n";
-                jTFmemoria.setText(set);
-                break;
-
-            case 11: //store
-                txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se ha movido a la memoria ");
-                jTFmemoria.setText("[" + inst2 + "]: " + inst1);
-                break;
-
-            case 100: //add
-
-                String input0 = inst1;
-                String input1 = inst2;
-
-                int number0 = Integer.parseInt(input0, 2);
-                int number1 = Integer.parseInt(input1, 2);
-
-                int sum = number0 + number1;
-                String resultado = Integer.toBinaryString(sum);
-                txtResult.setText(String.valueOf(resultado));
-                break;
-
-            case 101: //sub
-
-                System.out.println("Alejo Sub");
-                String nst = "",
-                 max = "";
-                char b = '0';
-                boolean tf = (inst1.length() >= inst2.length());
-                int l1 = inst1.length(),
-                 l2 = inst2.length();
-                if (l1 < l2) {
-                    for (int a = 1; a <= l2 - l1; a++) {
-                        inst1 = '0' + inst1;
-                    }
-                } else if (l2 < l1) {
-                    for (int a = 1; a <= l1 - l2; a++) {
-                        inst2 = "0" + inst2;
-                    }
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                for (int i = 0; i < 18; i++) {
+                    Thread.sleep(1000); // Introduce un retraso en el hilo de fondo
+                    SwingUtilities.invokeLater(() -> btnStepByStep.doClick()); // Ejecuta el clic del botón en el hilo de despacho de eventos
                 }
-                if (!tf) {
-                    for (int a = l1 - 1; a >= 0; a--) {
-                        if (inst1.charAt(a) != inst2.charAt(a)) {
-                            if (inst2.charAt(a) == '1') {
-                                max = inst2;
-                                inst2 = inst1;
-                                inst1 = max;
-                                break;
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Este código se ejecutará cuando la tarea de fondo esté completa
+                int opcion = Integer.parseInt(codop);
+                System.out.println("Aleo " + opcion);
+                switch (opcion) {
+                    case 0000: //move
+                        txtResult.setText("la dirección " + inst1 + " se ha movido a la direción " + inst2);
+                        jTFmemoria.setText("[" + inst2 + "]: " + inst1);
+                        break;
+
+                    case 0001: //clear
+                        txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 0 ");
+                        String clear = "";
+                        clear += "[" + inst1 + "]: 000000\n";
+
+                        clear += "[" + inst2 + "]: 000000\n";
+
+                        jTFmemoria.setText(clear);
+                        break;
+
+                    case 10: //set
+                        txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 1 ");
+                        String set = "";
+                        set += "[" + inst1 + "]: 111111\n" + "";
+                        set += "[" + inst2 + "]: 111111\n";
+                        jTFmemoria.setText(set);
+                        break;
+
+                    case 11: //store
+                        txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se ha movido a la memoria ");
+                        jTFmemoria.setText("[" + inst2 + "]: " + inst1);
+                        break;
+
+                    case 100: //add
+
+                        String input0 = inst1;
+                        String input1 = inst2;
+
+                        int number0 = Integer.parseInt(input0, 2);
+                        int number1 = Integer.parseInt(input1, 2);
+
+                        int sum = number0 + number1;
+                        String resultado = Integer.toBinaryString(sum);
+                        txtResult.setText(String.valueOf(resultado));
+                        break;
+
+                    case 101: //sub
+
+                        System.out.println("Alejo Sub");
+                        String nst = "",
+                         max = "";
+                        char b = '0';
+                        boolean tf = (inst1.length() >= inst2.length());
+                        int l1 = inst1.length(),
+                         l2 = inst2.length();
+                        if (l1 < l2) {
+                            for (int a = 1; a <= l2 - l1; a++) {
+                                inst1 = '0' + inst1;
+                            }
+                        } else if (l2 < l1) {
+                            for (int a = 1; a <= l1 - l2; a++) {
+                                inst2 = "0" + inst2;
                             }
                         }
-                    }
-                }
-
-                for (int a = inst1.length() - 1; a >= 0; a--) {
-                    if (inst1.charAt(a) == '1' && inst2.charAt(a) == '0') {
-                        if (b == '1') {
-                            nst = '0' + nst;
-                            b = '0';
-                        } else {
-                            nst = '1' + nst;
-                        }
-                    } else if (inst1.charAt(a) == inst2.charAt(a) && inst2.charAt(a) == '1') {
-                        if (b == '1') {
-                            nst = '1' + nst;
-                            b = '1';
-                        } else {
-                            nst = '0' + nst;
-                        }
-                    } else if (inst1.charAt(a) == '0' && inst2.charAt(a) == '1') {
-                        if (b == '1') {
-                            nst = '0' + nst;
-                        } else {
-                            nst = '1' + nst;
-                            b = '1';
-                        }
-                    } else {
-                        if (b == '1') {
-                            nst = '1' + nst;
-                        } else {
-                            nst = '0' + nst;
-                        }
-                    }
-                }
-                txtResult.setText(nst);
-
-                break;
-
-            case 110: //mpy
-                int prim = Integer.parseInt(inst1, 2);
-                int sec = Integer.parseInt(inst2, 2);
-
-                int r = prim * sec;
-
-                String rBin = Integer.toBinaryString(r);
-                txtResult.setText(rBin);
-                break;
-
-            case 111:// div
-                int primero = Integer.parseInt(inst1, 2);
-                int segundo = Integer.parseInt(inst2, 2);
-
-                int div = primero / segundo;
-
-                String division = Integer.toBinaryString(div);
-                txtResult.setText(division);
-                break;
-
-            case 1000: //negate
-                String negate = "";
-
-                for (int i = 0; i < inst1.length(); i++) {
-                    char n = inst1.charAt(i);
-                    if (String.valueOf(n).equals("1")) {
-                        negate += "0";
-                    }
-                    if (String.valueOf(n).equals("0")) {
-                        negate += "1";
-                    }
-                }
-                negate += "-";
-                for (int i = 0; i < inst2.length(); i++) {
-                    char nn = inst2.charAt(i);
-                    if (String.valueOf(nn).equals("1")) {
-                        negate += "0";
-                    }
-                    if (String.valueOf(nn).equals("0")) {
-                        negate += "1";
-                    }
-                }
-                txtResult.setText(negate);
-
-                break;
-
-            case 1001: //and
-                String and = "";
-                for (int i = 0; i < inst1.length(); i++) {
-                    for (int j = 0; j < inst2.length(); j++) {
-                        char ii = inst1.charAt(i);
-                        char jj = inst2.charAt(j);
-                        if (Character.valueOf(ii).equals(Character.valueOf(jj))) {
-                            and += 1;
-                        } else {
-                            and += 0;
+                        if (!tf) {
+                            for (int a = l1 - 1; a >= 0; a--) {
+                                if (inst1.charAt(a) != inst2.charAt(a)) {
+                                    if (inst2.charAt(a) == '1') {
+                                        max = inst2;
+                                        inst2 = inst1;
+                                        inst1 = max;
+                                        break;
+                                    }
+                                }
+                            }
                         }
 
-                    }
-                }
-                txtResult.setText(and);
+                        for (int a = inst1.length() - 1; a >= 0; a--) {
+                            if (inst1.charAt(a) == '1' && inst2.charAt(a) == '0') {
+                                if (b == '1') {
+                                    nst = '0' + nst;
+                                    b = '0';
+                                } else {
+                                    nst = '1' + nst;
+                                }
+                            } else if (inst1.charAt(a) == inst2.charAt(a) && inst2.charAt(a) == '1') {
+                                if (b == '1') {
+                                    nst = '1' + nst;
+                                    b = '1';
+                                } else {
+                                    nst = '0' + nst;
+                                }
+                            } else if (inst1.charAt(a) == '0' && inst2.charAt(a) == '1') {
+                                if (b == '1') {
+                                    nst = '0' + nst;
+                                } else {
+                                    nst = '1' + nst;
+                                    b = '1';
+                                }
+                            } else {
+                                if (b == '1') {
+                                    nst = '1' + nst;
+                                } else {
+                                    nst = '0' + nst;
+                                }
+                            }
+                        }
+                        txtResult.setText(nst);
 
-                break;
+                        break;
 
-            case 1010: //Or
-                String or = "";
-                for (int i = 0; i < inst1.length(); i++) {
-                    for (int j = 0; j < inst2.length(); j++) {
-                        char ii = inst1.charAt(i);
-                        char jj = inst2.charAt(j);
-                        if (Character.valueOf(ii).equals("1") | Character.valueOf(jj).equals("1")) {
-                            or += 1;
-                        } else {
-                            or += 0;
+                    case 110: //mpy
+                        int prim = Integer.parseInt(inst1, 2);
+                        int sec = Integer.parseInt(inst2, 2);
+
+                        int r = prim * sec;
+
+                        String rBin = Integer.toBinaryString(r);
+                        txtResult.setText(rBin);
+                        break;
+
+                    case 111:// div
+                        int primero = Integer.parseInt(inst1, 2);
+                        int segundo = Integer.parseInt(inst2, 2);
+
+                        int div = primero / segundo;
+
+                        String division = Integer.toBinaryString(div);
+                        txtResult.setText(division);
+                        break;
+
+                    case 1000: //negate
+                        String negate = "";
+
+                        for (int i = 0; i < inst1.length(); i++) {
+                            char n = inst1.charAt(i);
+                            if (String.valueOf(n).equals("1")) {
+                                negate += "0";
+                            }
+                            if (String.valueOf(n).equals("0")) {
+                                negate += "1";
+                            }
+                        }
+                        negate += "-";
+                        for (int i = 0; i < inst2.length(); i++) {
+                            char nn = inst2.charAt(i);
+                            if (String.valueOf(nn).equals("1")) {
+                                negate += "0";
+                            }
+                            if (String.valueOf(nn).equals("0")) {
+                                negate += "1";
+                            }
+                        }
+                        txtResult.setText(negate);
+
+                        break;
+
+                    case 1001: //and
+                        String and = "";
+                        for (int i = 0; i < inst1.length(); i++) {
+                            for (int j = 0; j < inst2.length(); j++) {
+                                char ii = inst1.charAt(i);
+                                char jj = inst2.charAt(j);
+                                if (Character.valueOf(ii).equals(Character.valueOf(jj))) {
+                                    and += 1;
+                                } else {
+                                    and += 0;
+                                }
+
+                            }
+                        }
+                        txtResult.setText(and);
+
+                        break;
+
+                    case 1010: //Or
+                        String or = "";
+                        for (int i = 0; i < inst1.length(); i++) {
+                            for (int j = 0; j < inst2.length(); j++) {
+                                char ii = inst1.charAt(i);
+                                char jj = inst2.charAt(j);
+                                if (Character.valueOf(ii).equals("1") | Character.valueOf(jj).equals("1")) {
+                                    or += 1;
+                                } else {
+                                    or += 0;
+                                }
+
+                            }
+                        }
+                        txtResult.setText(or);
+                        break;
+
+                    case 1011: //not
+                        String not = "";
+
+                        for (int i = 0; i < inst1.length(); i++) {
+                            char n = inst1.charAt(i);
+                            if (String.valueOf(n).equals("1")) {
+                                not += "0";
+                            }
+                            if (String.valueOf(n).equals("0")) {
+                                not += "1";
+                            }
+                        }
+                        not += "-";
+                        for (int i = 0; i < inst2.length(); i++) {
+                            char nn = inst2.charAt(i);
+                            if (String.valueOf(nn).equals("1")) {
+                                not += "0";
+                            }
+                            if (String.valueOf(nn).equals("0")) {
+                                not += "1";
+                            }
                         }
 
-                    }
+                        txtResult.setText(not);
+
+                        break;
+
+                    case 1100: //compare
+                        String compare = "";
+
+                        if (inst1 == inst2) {
+                            compare = "número igual";
+                        }
+                        txtResult.setText(compare);
+                        break;
+
+                    default:
+                        System.out.println("switch default case");
+
                 }
-                txtResult.setText(or);
-                break;
+            }
+        };
 
-            case 1011: //not
-                String not = "";
-
-                for (int i = 0; i < inst1.length(); i++) {
-                    char n = inst1.charAt(i);
-                    if (String.valueOf(n).equals("1")) {
-                        not += "0";
-                    }
-                    if (String.valueOf(n).equals("0")) {
-                        not += "1";
-                    }
-                }
-                not += "-";
-                for (int i = 0; i < inst2.length(); i++) {
-                    char nn = inst2.charAt(i);
-                    if (String.valueOf(nn).equals("1")) {
-                        not += "0";
-                    }
-                    if (String.valueOf(nn).equals("0")) {
-                        not += "1";
-                    }
-                }
-
-                txtResult.setText(not);
-
-                break;
-
-            case 1100: //compare
-                String compare = "";
-
-                if (inst1 == inst2) {
-                    compare = "número igual";
-                }
-                txtResult.setText(compare);
-                break;
-
-            default:
-                System.out.println("switch default case");
-
-        }
+        worker.execute(); // Inicia la tarea de fondo
     }//GEN-LAST:event_btnExeActionPerformed
 
     private void jTFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFacActionPerformed
@@ -1187,12 +1201,8 @@ public class main extends javax.swing.JFrame {
                 //fr.setAlwaysOnTop(true);
 
                 if (ciclo == 2) {
-                    JOptionPane.showMessageDialog(fr,
-                            "Fin del ciclo de captación\n",
-                            "Fincap", JOptionPane.OK_OPTION);
                     jTFintrucComp.setText("");
                     ciclo = 0;
-                    btnExe.setEnabled(true);
                 }
 
                 aux = 1;
