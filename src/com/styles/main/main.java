@@ -717,7 +717,6 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(btnShowCodops)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)
                                 .addGap(641, 641, 641))))
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
@@ -765,9 +764,7 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnShowCodops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(btnExe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnExe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(437, 437, 437)
@@ -793,7 +790,7 @@ public class main extends javax.swing.JFrame {
                 .addGap(204, 204, 204)
                 .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
+            .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1346, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,34 +829,57 @@ public class main extends javax.swing.JFrame {
                 System.out.println("Aleo " + opcion);
                 switch (opcion) {
                     case 0000: //move
-                        txtResult.setText("La dirección " + inst1 + " se ha movido a la direción " + inst2);
-                        jTFmemoria.setText("[" + inst2 + "]: " + inst1);
-                        break;
+                      txtResult.setText("La dirección " + inst1 + " se ha movido a la dirección " + inst2);
 
-                    case 0001: //clear
-                        txtResult.setText("Las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 0 ");
-                        String clear = "";
-                        clear += "[" + inst1 + "]: 000000\n";
+                        // Buscar las posiciones de las direcciones en Memorias
+                        int posicionInst1 = -1;
+                        int posicionInst2 = -1;
 
-                        clear += "[" + inst2 + "]: 000000\n";
+                        for (int i = 0; i < Memorias.size(); i++) {
+                            String elemento = Memorias.get(i);
 
-                        jTFmemoria.setText(clear);
-                        break;
+                            // Verificar si el elemento está en el formato "[dirección]: contenido"
+                            if (elemento.matches("\\[.*\\]:.*")) {
+                                // Obtener el contenido y la dirección del elemento
+                                String[] partes = elemento.split(":");
+                                String direccion = partes[0].trim(); // Conservar corchetes y espacios al inicio
+                                String contenido = partes[1].trim();
 
-                    case 10: //set
-                        txtResult.setText("Las direcciones " + inst1 + " y " + inst2 + " se han reemplazado por palabras 1 ");
-                        String set = "";
-                        set += "[" + inst1 + "]: 111111\n" + "";
-                        set += "[" + inst2 + "]: 111111\n";
-                        jTFmemoria.setText(set);
-                        break;
+                                if (direccion.equals("[" + inst1 + "]")) {
+                                    // Encontrar la posición de la dirección con el contenido de inst1
+                                    posicionInst1 = i;
+                                } else if (direccion.equals("[" + inst2 + "]")) {
+                                    // Encontrar la posición de la dirección con el contenido de inst2
+                                    posicionInst2 = i;
+                                }
+                            }
+                        }
 
-                    case 11: //store
-                        txtResult.setText("Las direcciones " + inst1 + " y " + inst2 + " se ha movido a la memoria ");
-                       
-                        Memorias.add("[" + inst2 + "]: " + inst1 );
+                        // Verificar si se encontraron dos posiciones con las direcciones específicas
+                        if (posicionInst1 != -1 && posicionInst2 != -1) {
+                            // Realizar el intercambio del contenido después de los corchetes
+                            String contenidoInst1 = Memorias.get(posicionInst1).split(":")[1].trim();
+                            String contenidoInst2 = Memorias.get(posicionInst2).split(":")[1].trim();
+
+                            Memorias.set(posicionInst1, "[" + inst1 + "]: " + contenidoInst2);
+                            Memorias.set(posicionInst2, "[" + inst2 + "]: " + contenidoInst1);
+
+                            // Actualizar la GUI o realizar otras acciones necesarias
+                            // Puedes mostrar el ArrayList actualizado, por ejemplo
+                            System.out.println("ArrayList después del intercambio:");
+                            for (String elemento : Memorias) {
+                                System.out.println(elemento);
+                            }
+                        } else {
+                            // No se encontraron dos posiciones con las direcciones específicas, manejar según sea necesario
+                            System.out.println("No se encontraron dos posiciones con las direcciones específicas en Memorias.");
+                        }
+
+
+                        
+          
                 
-                        jTFmemoria.setText(String.join(", ",Memorias));
+                        jTFmemoria.setText(String.join("\n",Memorias));
                         break;
 
                     case 100: //add
@@ -878,7 +898,7 @@ public class main extends javax.swing.JFrame {
                 
                         Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
                 
-                        jTFmemoria.setText(String.join(", ",Memorias));
+                        jTFmemoria.setText(String.join("\n",Memorias));
                         break;
 
                     case 101: //sub
@@ -982,7 +1002,7 @@ public class main extends javax.swing.JFrame {
                 
                         Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
                 
-                        jTFmemoria.setText(String.join(", ",Memorias));
+                        jTFmemoria.setText(String.join("\n",Memorias));
                         break;
 
                     case 1000: //negate
@@ -1351,7 +1371,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1359,10 +1378,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -1375,34 +1390,27 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanelCPU;
     public static javax.swing.JPanel jPanelFondo;
-    private javax.swing.JPanel jPanelGeneral;
+    public static javax.swing.JPanel jPanelGeneral;
     public static javax.swing.JPanel jPanelMemoria;
-    private javax.swing.JPanel jPanelMemoria1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTAalu;
     private javax.swing.JTextField jTFac;
     private javax.swing.JTextField jTFbControl;
-    private javax.swing.JTextField jTFbControl1;
     private javax.swing.JTextField jTFbDatos;
-    private javax.swing.JTextField jTFbDatos1;
     private javax.swing.JTextField jTFbIntr;
-    private javax.swing.JTextField jTFbIntr1;
     private javax.swing.JTextField jTFintrucComp;
     private javax.swing.JTextField jTFir;
     private javax.swing.JTextField jTFmar;
     private javax.swing.JTextField jTFmbr;
     private javax.swing.JTextArea jTFmemoria;
-    private javax.swing.JTextArea jTFmemoria1;
     private javax.swing.JTextField jTFpc;
     private javax.swing.JTextField jTFuc;
     private java.awt.List listRegistros;
     private java.awt.List listRegistros1;
     private java.awt.List listRegistros2;
-    private java.awt.List listRegistros3;
     private javax.swing.JTextArea txtResult;
     // End of variables declaration//GEN-END:variables
 
