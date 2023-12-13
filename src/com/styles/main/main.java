@@ -13,6 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.text.DefaultCaret;
 import javax.swing.SwingWorker;
 import javax.swing.SwingUtilities;
+import java.util.ArrayList;
+import java.util.Random;
+
 
 /**
  *
@@ -28,6 +31,9 @@ public class main extends javax.swing.JFrame {
     String codop = "vacio";
     String inst1 = "instr 1";
     String inst2 = "instr 2";
+    String numeroBinarioGenerado ="";
+    ArrayList<String> Memorias = new ArrayList<>();
+
 
     public main() {
 
@@ -46,6 +52,24 @@ public class main extends javax.swing.JFrame {
         jPanelGeneral.setBackground(new Color(52, 73, 85));
     }
 
+         public static String generarNumeroBinario() {
+        // Crear un objeto Random
+         Random rand = new Random();
+
+        // Generar un número aleatorio entre 0 y 63
+        int numeroAleatorio = rand.nextInt(64);
+
+        // Convertir el número a su representación binaria
+        String numeroBinario = Integer.toBinaryString(numeroAleatorio);
+
+        // Asegurarse de que el número binario tenga 6 dígitos (para cubrir el rango de 0 a 63)
+        numeroBinario = String.format("%6s", numeroBinario).replace(' ', '0');
+
+        return numeroBinario;
+    }  
+
+    
+    
     public void captacion1(String dir, String dir2, int ciclo) throws InterruptedException {
 
         if (ciclo == 1) {
@@ -227,6 +251,17 @@ public class main extends javax.swing.JFrame {
         jPanelGeneral.setBackground(new java.awt.Color(255, 255, 255));
         jPanelGeneral.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         jPanelGeneral.setPreferredSize(new java.awt.Dimension(1366, 768));
+
+        javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
+        jPanelGeneral.setLayout(jPanelGeneralLayout);
+        jPanelGeneralLayout.setHorizontalGroup(
+            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 876, Short.MAX_VALUE)
+        );
+        jPanelGeneralLayout.setVerticalGroup(
+            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 768, Short.MAX_VALUE)
+        );
 
         jPanelFondo.setBackground(new java.awt.Color(52, 73, 85));
         jPanelFondo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -564,12 +599,10 @@ public class main extends javax.swing.JFrame {
                                         .addGap(55, 55, 55)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanelCPULayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanelCPULayout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelCPULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanelCPULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,11 +610,11 @@ public class main extends javax.swing.JFrame {
                                 .addGap(52, 52, 52)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCPULayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelCPULayout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addComponent(jLabel9))))
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanelCPULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22))
                     .addGroup(jPanelCPULayout.createSequentialGroup()
                         .addGap(487, 487, 487)
                         .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -612,30 +645,27 @@ public class main extends javax.swing.JFrame {
                             .addGroup(jPanelCPULayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(jTFmar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel8)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFmbr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFuc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
-                            .addGroup(jPanelCPULayout.createSequentialGroup()
                                 .addGroup(jPanelCPULayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelCPULayout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelCPULayout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(jLabel13)
+                                        .addComponent(jTFmbr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(jTFuc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelCPULayout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
 
         javax.swing.GroupLayout jPanelFondoLayout = new javax.swing.GroupLayout(jPanelFondo);
@@ -675,12 +705,12 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(btnStepByStep, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                                .addComponent(jPanelCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanelCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanelMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(jPanelFondoLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(jLabel10)
@@ -733,31 +763,23 @@ public class main extends javax.swing.JFrame {
                 .addGap(117, 117, 117))
         );
 
-        javax.swing.GroupLayout jPanelGeneralLayout = new javax.swing.GroupLayout(jPanelGeneral);
-        jPanelGeneral.setLayout(jPanelGeneralLayout);
-        jPanelGeneralLayout.setHorizontalGroup(
-            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeneralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1284, Short.MAX_VALUE)
-                .addGap(84, 84, 84))
-        );
-        jPanelGeneralLayout.setVerticalGroup(
-            jPanelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 1303, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1309, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -812,7 +834,10 @@ public class main extends javax.swing.JFrame {
 
                     case 11: //store
                         txtResult.setText("las direcciones " + inst1 + " y " + inst2 + " se ha movido a la memoria ");
-                        jTFmemoria.setText("[" + inst2 + "]: " + inst1);
+                       
+                        Memorias.add("[" + inst2 + "]: " + inst1 );
+                
+                        jTFmemoria.setText(String.join(", ",Memorias));
                         break;
 
                     case 100: //add
@@ -826,11 +851,16 @@ public class main extends javax.swing.JFrame {
                         int sum = number0 + number1;
                         String resultado = Integer.toBinaryString(sum);
                         txtResult.setText(String.valueOf(resultado));
+                        
+                        numeroBinarioGenerado = generarNumeroBinario();
+                
+                        Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
+                
+                        jTFmemoria.setText(String.join(", ",Memorias));
                         break;
 
                     case 101: //sub
 
-                        System.out.println("Alejo Sub");
                         String nst = "",
                          max = "";
                         char b = '0';
@@ -890,6 +920,13 @@ public class main extends javax.swing.JFrame {
                             }
                         }
                         txtResult.setText(nst);
+                        
+                        
+                        numeroBinarioGenerado = generarNumeroBinario();
+                
+                        Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
+                
+                        jTFmemoria.setText(String.join(", ",Memorias));
 
                         break;
 
@@ -901,6 +938,12 @@ public class main extends javax.swing.JFrame {
 
                         String rBin = Integer.toBinaryString(r);
                         txtResult.setText(rBin);
+                        
+                        numeroBinarioGenerado = generarNumeroBinario();
+                
+                        Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
+                
+                        jTFmemoria.setText(String.join("\n",Memorias));
                         break;
 
                     case 111:// div
@@ -911,6 +954,13 @@ public class main extends javax.swing.JFrame {
 
                         String division = Integer.toBinaryString(div);
                         txtResult.setText(division);
+                        
+                        
+                        numeroBinarioGenerado = generarNumeroBinario();
+                
+                        Memorias.add("[" + numeroBinarioGenerado + "]: " + String.format("%6s", txtResult.getText()).replace(' ', '0'));
+                
+                        jTFmemoria.setText(String.join(", ",Memorias));
                         break;
 
                     case 1000: //negate
