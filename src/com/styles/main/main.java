@@ -46,6 +46,7 @@ public class main extends javax.swing.JFrame {
 
         btnStepByStep.setVisible(false);
         jLabel10.setVisible(false);
+        btnRestart.setVisible(false);
         jPanelFondo.setBackground(new Color(52, 73, 85));
         jPanelGeneral.setBackground(new Color(52, 73, 85));
     }
@@ -301,7 +302,7 @@ public class main extends javax.swing.JFrame {
         btnShowCodops.setBackground(new java.awt.Color(13, 110, 253));
         btnShowCodops.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnShowCodops.setForeground(new java.awt.Color(255, 255, 255));
-        btnShowCodops.setText("Mostrar codops");
+        btnShowCodops.setText("Codops");
         btnShowCodops.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowCodopsActionPerformed(evt);
@@ -722,14 +723,9 @@ public class main extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelFondoLayout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel12)
-                                        .addGap(552, 552, 552))
-                                    .addGroup(jPanelFondoLayout.createSequentialGroup()
                                         .addComponent(jPanelCPU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jPanelMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(jPanelMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 221, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanelFondoLayout.createSequentialGroup()
@@ -737,7 +733,12 @@ public class main extends javax.swing.JFrame {
                                             .addComponent(btnStepByStep, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel10)
                                             .addComponent(jTFintrucComp, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(477, 477, 477)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(87, 87, 87)))
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
@@ -745,13 +746,10 @@ public class main extends javax.swing.JFrame {
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel15)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
@@ -763,9 +761,9 @@ public class main extends javax.swing.JFrame {
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnShowCodops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnExe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnShowCodops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnExe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(437, 437, 437)
@@ -791,7 +789,7 @@ public class main extends javax.swing.JFrame {
                 .addGap(204, 204, 204)
                 .addComponent(jPanelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1346, Short.MAX_VALUE)
+            .addComponent(jPanelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -817,7 +815,7 @@ public class main extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
                 for (int i = 0; i < 18; i++) {
-                    Thread.sleep(1000); // Introduce un retraso en el hilo de fondo
+                    Thread.sleep(2000); // Introduce un retraso en el hilo de fondo
                     SwingUtilities.invokeLater(() -> btnStepByStep.doClick()); // Ejecuta el clic del botón en el hilo de despacho de eventos
                 }
                 return null;
