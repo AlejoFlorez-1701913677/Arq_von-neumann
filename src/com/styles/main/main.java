@@ -766,32 +766,10 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowCodopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowCodopsActionPerformed
-        // TODO add your handling code here:
-
-        JFrame fr = new JFrame("Mostrar codops");
-        fr.setAlwaysOnTop(true);
-
-        JOptionPane.showMessageDialog(fr,
-                "0000 - move\n"
-                + "0001 - clear\n"
-                + "0010 - set\n"
-                + "0011 - store	\n"
-                + "\n"
-                + " -- Aritméticas:\n"
-                + "\n"
-                + "0100 - add\n"
-                + "0101 - sub\n"
-                + "0110 - mpy\n"
-                + "0111 - div\n"
-                + "1000 - negate\n"
-                + "\n"
-                + "-- Lógicas:\n"
-                + "\n"
-                + "1001 - and\n"
-                + "1010 - or\n"
-                + "1011 - not\n"
-                + "1100 - compare",
-                "Mostrar codops", JOptionPane.OK_OPTION);
+        
+        modalShowCodops mdlShow = new modalShowCodops();
+        mdlShow.setAlwaysOnTop(true);
+        mdlShow.setVisible(true);
     }//GEN-LAST:event_btnShowCodopsActionPerformed
 
     private void btnExeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExeActionPerformed

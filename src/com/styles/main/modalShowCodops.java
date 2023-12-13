@@ -4,6 +4,11 @@
  */
 package com.styles.main;
 
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author cici0
@@ -15,6 +20,29 @@ public class modalShowCodops extends javax.swing.JFrame {
      */
     public modalShowCodops() {
         initComponents();
+        
+         jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"MOVE","4","6","6","0000","TRANSFERENCIA DE DATOS"},
+                {"CLEAR","4","6","6","0001","TRANSFERENCIA DE DATOS"},
+                {"SET","4","6","6","0010","TRANSFERENCIA DE DATOS"},
+                {"STORE","4","6","6","0011","TRANSFERENCIA DE DATOS"},
+                {"ADD","4","6","6","0100","ARITMÉTICAS"},
+                {"SUB","4","6","6","0101","ARITMÉTICAS"},
+                {"MPY","4","6","6","0110","ARITMÉTICAS"},
+                {"DIV","4","6","6","0111","ARITMÉTICAS"},
+                {"NEGATE","4","6","6","1000","LÓGICA"},
+                {"AND","4","6","6","1001","LÓGICA"},
+                {"OR","4","6","6","1010","LÓGICA"},
+                {"NOT","4","6","6","1100","LÓGICA"}
+            },
+            new String [] {
+                "Instrucción", "Codops\n(Bits)", "Operando 1\n(Bits)", "Operando 2\n(Bits)","Codops","Categoria"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+        
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     /**
@@ -26,18 +54,35 @@ public class modalShowCodops extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+
+        jTable1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setRowHeight(45);
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +124,7 @@ public class modalShowCodops extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
